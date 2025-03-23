@@ -6,6 +6,7 @@ const copyFileAsync = util.promisify(fs.copyFile);
 const statAsync = util.promisify(fs.stat);
 const readdirAsync = util.promisify(fs.readdir);
 const mkdirAsync = util.promisify(fs.mkdir);
+const rmAsync = util.promisify(fs.rm);
 const appendFileAsync = util.promisify(fs.appendFile);
 
 async function logError(message) {
@@ -24,6 +25,9 @@ async function copyRecursive(source, destination, excludeItems) {
         const stats = await statAsync(source);
         
         if (stats.isDirectory()) {
+            if (fs.existsSync(destination)) {
+                await rmAsync(destination, { recursive: true, force: true });
+            }
             await mkdirAsync(destination, { recursive: true });
             const items = await readdirAsync(source);
             
@@ -35,6 +39,9 @@ async function copyRecursive(source, destination, excludeItems) {
                 );
             }
         } else {
+            if (fs.existsSync(destination)) {
+                await rmAsync(destination, { force: true });
+            }
             await copyFileAsync(source, destination);
             console.log(`Copied: ${source} -> ${destination}`);
         }
@@ -73,9 +80,9 @@ async function copyFiles(sourceDir, destinationDir, excludeItems = []) {
 }
 
 // Example usage
-const sourceFolder = 'D:\\2022_Reinit\\SANDBOXES\\0000_GET_OUT';
-const destinationFolder = 'F:\\FOLDER_2025\\SANDBOXES\\0000_GET_OUT';
+const sourceFolder = 'D:\\2022_Reinit\\SANDBOXES';
+const destinationFolder = 'F:\\FOLDER_2025\\SANDBOXES';
 
-const itemsToExclude = ['.vscode', '.cache', 'node_modules'];
+const itemsToExclude = ['.vscode', 'node_modules'];
 
 copyFiles(sourceFolder, destinationFolder, itemsToExclude);
