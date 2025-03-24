@@ -86,13 +86,14 @@ async function copyFiles(sourceDir, destinationDir, excludeItems = []) {
     }
     
     const endTime = getCurrentTime();
+    console.log(`Operation started at: ${getCurrentTime()}`);
     console.log(`Operation ended at: ${endTime}`);
 }
 
 
 // Example usage
-const sourceFolder = 'D:\\2022_Reinit\\SANDBOXES';
-const destinationFolder = 'F:\\FOLDER_2025\\SANDBOXES';
+const sourceFolder = 'F:\\FOLDER_2025\\SANDBOXES';
+const destinationFolder = 'D:\\FOLDER_2025\\SANDBOXES';
 
 const itemsToExclude = ['.vscode', 'node_modules'];
 
