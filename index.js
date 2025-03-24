@@ -86,6 +86,7 @@ async function copyFiles(sourceDir, destinationDir, excludeItems = []) {
     }
     
     const endTime = getCurrentTime();
+    console.log(`Operation started at: ${getCurrentTime()}`);
     console.log(`Operation ended at: ${endTime}`);
 }
 
