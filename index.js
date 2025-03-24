@@ -9,6 +9,10 @@ const mkdirAsync = util.promisify(fs.mkdir);
 const rmAsync = util.promisify(fs.rm);
 const appendFileAsync = util.promisify(fs.appendFile);
 
+function getCurrentTime() {
+    return new Date().toLocaleTimeString('en-US', { hour12: false });
+}
+
 async function logError(message) {
     const logFile = path.join(__dirname, 'file-move.log');
     const timestamp = new Date().toISOString();
@@ -53,6 +57,9 @@ async function copyRecursive(source, destination, excludeItems) {
 }
 
 async function copyFiles(sourceDir, destinationDir, excludeItems = []) {
+    console.log(`Operation started at: ${getCurrentTime()}`);
+    const startTime = getCurrentTime();
+
     if (!fs.existsSync(sourceDir)) {
         const errorMsg = `Source directory "${sourceDir}" does not exist.`;
         console.error(errorMsg);
@@ -77,7 +84,11 @@ async function copyFiles(sourceDir, destinationDir, excludeItems = []) {
         console.error('Error reading source directory:', err);
         await logError(`Error reading source directory: ${err.message}`);
     }
+    
+    const endTime = getCurrentTime();
+    console.log(`Operation ended at: ${endTime}`);
 }
+
 
 // Example usage
 const sourceFolder = 'D:\\2022_Reinit\\SANDBOXES';
