@@ -92,8 +92,8 @@ async function copyFiles(sourceDir, destinationDir, excludeItems = []) {
 
 
 // Example usage
-const sourceFolder = 'D:\\2022_Reinit\\SANDBOXES';
-const destinationFolder = 'F:\\FOLDER_2025\\SANDBOXES';
+const sourceFolder = 'F:\\FOLDER_2025\\SANDBOXES';
+const destinationFolder = 'D:\\FOLDER_2025\\SANDBOXES';
 
 const itemsToExclude = ['.vscode', 'node_modules'];
 
